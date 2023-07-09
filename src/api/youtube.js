@@ -1,13 +1,8 @@
 import axios from "axios";
 
-export default class Youtebe {
-  constructor() {
-    this.httpClient = axios.create({
-      baseURL: "https://www.googleapis.com/youtube/v3",
-      params: {
-        key: import.meta.env.VITE_YOUTUBE_API_KEY,
-      },
-    });
+export default class Youtube {
+  constructor(apiClient) {
+    this.apiClient = apiClient;
   }
 
   async search(keyword) {
@@ -16,8 +11,8 @@ export default class Youtebe {
 
   // private 함수 (클래스 내부에서만 사용)
   async #searchByKeyword(keyword) {
-    return this.httpClient
-      .get("search", {
+    return this.apiClient
+      .search({
         params: {
           part: "snippet",
           maxResults: 25,
@@ -31,8 +26,8 @@ export default class Youtebe {
 
   // private 함수 (클래스 내부에서만 사용)
   async #mostPopular() {
-    return this.httpClient
-      .get("videos", {
+    return this.apiClient
+      .videos({
         params: {
           part: "snippet",
           maxResults: 25,
