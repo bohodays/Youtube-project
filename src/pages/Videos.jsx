@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
 import VideoCard from "../components/VideoCard";
-import { search } from "../api/youtube";
+import Youtebe from "../api/youtube";
 import FakeYoutebe from "../api/fakeYoutube";
 
 const Videos = () => {
@@ -12,7 +12,7 @@ const Videos = () => {
     error,
     data: videos,
   } = useQuery(["videos", keyword], () => {
-    const youtube = new FakeYoutebe();
+    const youtube = new Youtebe();
     return youtube.search(keyword);
   });
 
